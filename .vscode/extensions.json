@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "charliermarsh.ruff",
+    "d-biehl.robotcode",
+    "ms-playwright.playwright",
+    "github.vscode-github-actions"
+  ]
+}
