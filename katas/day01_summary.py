@@ -5,7 +5,7 @@ workers = 4
 
 failed = total - (passed + skipped)
 ran = total - skipped
-pass_rate = (passed / ran)
+pass_rate = passed / ran
 per_worker = total // workers
 left_over = total % workers
 
