@@ -17,7 +17,7 @@ failed = [name for name, status, _ in results if status == "FAIL"]
 assert failed == ["search", "profile"], f"2: got {failed}"
 
 # 3. Dict: name -> status
-status_by_name = {name: status for name, status, _1 in results}
+status_by_name = {name: status for name, status, _ in results}
 assert status_by_name == {
     "login": "PASS",
     "search": "FAIL",
@@ -39,7 +39,7 @@ slow = {name: duration for name, _, duration in results if duration > 1.0}
 assert slow == {"login": 1.2, "search": 3.4, "profile": 2.1}, f"6: got {slow}"
 
 # 7. Names longer than 5 characters, in UPPERCASE
-long_upper = [name.upper() for name, status, _ in results if len(name) > 5]
+long_upper = [name.upper() for name, _, _ in results if len(name) > 5]
 assert long_upper == ["SEARCH", "CHECKOUT", "PROFILE"], f"7: got {long_upper}"
 
 # 8. A label for EVERY test: "OK" if PASS, otherwise "NOT OK"
@@ -51,7 +51,7 @@ passed_time = sum(duration for _, status, duration in results if status == "PASS
 assert math.isclose(passed_time, 2.0), f"9: got {passed_time}"
 
 # 10. Number of FAILED tests (without using `failed` from #2)
-fail_count = len([status for _, status, _ in results if status == "FAIL"])
+fail_count = sum(1 for _, status, _ in results if status == "FAIL")
 assert fail_count == 2, f"10: got {fail_count}"
 
 print("All 10 passed!")
