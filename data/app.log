@@ -1,0 +1,14 @@
+2026-11-24 09:00:01 INFO Server started
+2026-11-24 09:00:02 DEBUG Loading config from /etc/app.yaml
+2026-11-24 09:00:05 INFO User login: alice
+2026-11-24 09:01:10 WARNING Slow response: 2300 ms on /search
+2026-11-24 09:01:11 ERROR Database timeout after 30 s
+2026-11-24 09:02:00 INFO User login: bob
+
+2026-11-24 09:02:30 ERROR Payment service returned 503
+2026-11-24 09:03:00 CRITICAL Disk full on /var/log
+2026-11-24 09:03:01 ERROR Could not write log file
+garbage line without format
+2026-11-24 09:04
+2026-11-24 09:05:00 WARNING Retrying payment (attempt 2)
+2026-11-24 09:06:00 INFO Server stopped
