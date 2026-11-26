@@ -1,42 +1,30 @@
 with open("data/app.log") as f:
     lines = f.read().splitlines()
-   # print(lines)
 LEVELS = {"DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"}
 invalid = 0
+counts = {}
+problems = []
 
-for line in lines:
+
+for number, line in enumerate(lines, start = 1):
     parts = line.split()
-    print (f"this line: {parts} has this length {len(parts)}")
-    if parts == "":
+    if not parts:
         continue
-    elif len(parts) < 3:
-        print(f"the length of the line is: {len(parts)}")
+    elif len(parts) < 3 or parts[2] not in LEVELS:
         invalid += 1
+    else:
+        level = parts[2]
+        counts[level] = counts.get(level, 0) + 1
+        if level in {"ERROR", "CRITICAL"}:
+            message = " ".join(parts[3:])
+            problems.append(f"line {number}: {message}")
+assert counts == {"INFO": 4, "DEBUG": 1, "WARNING": 2, "ERROR": 3, "CRITICAL": 1}, f"got {counts}"
+assert invalid == 2, f"got {invalid}"
+assert len(problems) == 4, f"got {problems}"
 
-print(invalid)
-   # elif parts[2] not in LEVELS:
-    #    invalid += 1
-    
+for level, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+    print(f"{level}: {count}")  
 
-
-
-
-    # for word in line:
-    #     if word == " ":
-    #         continue
-    #     elseif word ==
-
-
-
-
-
-
-
-
-
-
-
-
-# assert counts == {"INFO": 4, "DEBUG": 1, "WARNING": 2, "ERROR": 3, "CRITICAL": 1}, f"got {counts}"
-# assert invalid == 2, f"got {invalid}"
-# assert len(problems) == 4, f"got {problems}"
+print(f"Invalid lines: {invalid}")
+print(f"Has errors: {any("ERROR" for level in counts)}")
+print(f"Problems: {problems.split()}")
